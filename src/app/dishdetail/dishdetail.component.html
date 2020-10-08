@@ -1,0 +1,46 @@
+<div class="container"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center"
+    fxLayoutGap="10px" 
+    fxLayoutGap.xs="0">
+
+  <div fxFlex="40">
+    <div fxFlex *ngIf="plato">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <h3>{{plato.name | uppercase}}</h3>
+            </mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src={{plato.image}} alt={{plato.name}}>
+          <mat-card-content>
+            <p>{{plato.description}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+  </div>
+  <div fxFlex="40">
+    
+    <mat-list>
+        <h3>Comments</h3>
+        <mat-list-item *ngFor="let comment of plato.comments">
+            
+            <p matLine>{{comment.comment}}</p>
+            <p matLine>{{comment.rating}} stars</p>
+
+            
+            
+            <p matLine>{{comment.author}}<br> {{comment.date | date}}</p>
+            
+        </mat-list-item>
+      </mat-list>
+
+  </div>
+</div>
