@@ -6,16 +6,17 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
-  <div fxFlex="100">
+  <div fxFlex="100" *ngIf="dish">
     <div>
       <h3>{{dish.name | uppercase}}</h3>
       <hr>
     </div>
   </div>
+  
 
   <div fxFlex="40">
-    <div fxFlex *ngIf="dish">
-        <mat-card>
+    <div fxFlex>
+        <mat-card *ngIf="dish">
           <mat-card-header>
             <mat-card-title>
               <h3>{{dish.name | uppercase}}</h3>
@@ -32,11 +33,22 @@
             <button mat-button (click)="goBack()">BACK</button>
           </mat-card-actions>
         </mat-card>
+
+        <div [hidden]="dish">
+          <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+        </div>
+
       </div>
   </div>
+
+  
+
+
+
   <div fxFlex="40">
+
     
-    <mat-list>
+      <mat-list *ngIf="dish">
         <h3>Comments</h3>
         <mat-list-item *ngFor="let comment of dish.comments">
             
@@ -49,6 +61,12 @@
             
         </mat-list-item>
       </mat-list>
-
+      <div [hidden]="dish">
+        <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+      </div>
   </div>
+  <div [hidden]="dish">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+
 </div>
