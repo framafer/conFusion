@@ -22,7 +22,7 @@
               <h3>{{dish.name | uppercase}}</h3>
             </mat-card-title>
           </mat-card-header>
-          <img mat-card-image src={{dish.image}} alt={{dish.name}}>
+          <img mat-card-image src="{{ baseURL + dish.image }}" alt={{dish.name}}>
           <mat-card-content>
             <p>{{dish.description}}
             </p>
@@ -71,5 +71,48 @@
   <div [hidden]="dish">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
+
+  <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
+
+  <form novalidate [formGroup]="commentForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field class="full-width">
+        <input matInput formControlName="author" placeholder="Name" type="text" required>
+        <mat-error *ngIf="commentForm.get('author').hasError('required') && commentForm.get('author').touched">Name is required</mat-error>
+      </mat-form-field>
+    </p>
+    
+    <mat-card>
+      <mat-card-content>
+        <h2>Rating</h2>
+    
+        <mat-slider
+            
+            [disabled]=false
+            [invert]=false
+            [max]=5
+            [min]=1
+            [step]=1
+            thumbLabel
+            [displayWith] = "formatLabel"
+            [tickInterval]=1
+            formControlName = "rating"
+            
+            [vertical]= false>
+        </mat-slider>
+      </mat-card-content>
+    </mat-card>
+
+    <p>
+        <mat-form-field class="full-width">
+          <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12 required></textarea>
+        </mat-form-field>
+    </p>
+    
+    <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+  </form>
+
+
+
 
 </div>
