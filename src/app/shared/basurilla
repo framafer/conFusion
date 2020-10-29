@@ -1,1 +1,3 @@
 C:\Coursera\Proyectos Angular\conFusion5\json-server
+
+json-server --watch db.json -d 2000
